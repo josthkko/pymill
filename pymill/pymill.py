@@ -673,7 +673,7 @@ class Pymill(object):
         """
         return self._api_call("https://api.paymill.com/v2/offers/", return_type=Offer)
 
-    def new_subscription(self, client, offer, payment, start_at=None):
+    def new_subscription(self, client, offer, payment, start_at=None, amount=None):
         """Subscribes a client to an offer
         
         :Parameters:
@@ -689,7 +689,7 @@ class Pymill(object):
         if isinstance(real_start_at, datetime):
             real_start_at = time.mktime(real_start_at.timetuple())
         
-        return self._api_call("https://api.paymill.com/v2/subscriptions", dict_without_none(offer=str(offer), client=str(client), payment=str(payment), start_at=real_start_at), return_type=Subscription)
+        return self._api_call("https://api.paymill.com/v2.1/subscriptions", dict_without_none(offer=str(offer), client=str(client), payment=str(payment), amount=str(amount), start_at=real_start_at), return_type=Subscription)
 
     def get_subscription(self, subscription_id):
         """Get the details of a subscription from its id.
